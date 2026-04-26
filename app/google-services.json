@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "644777528551",
+    "project_id": "ventasliveapp",
+    "storage_bucket": "ventasliveapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644777528551:android:70d7e29f7f6b11082e2642",
+        "android_client_info": {
+          "package_name": "cl.salinas.ventasliveapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtBel-IVEAdV_fnoAJQspkOPqzZ3oJL38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

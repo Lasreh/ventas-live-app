@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F3F4F6"
+    android:padding="24dp">
+
+    <!-- TÍTULO -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ventas en Vivo"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#111827"/>
+
+    <!-- SUBTÍTULO -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gestiona tus ventas fácilmente"
+        android:textSize="14sp"
+        android:textColor="#6B7280"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- IMAGEN -->
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_gravity="center"
+        android:src="@drawable/portada"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- 📅 FILTRO FECHA -->
+    <Button
+        android:id="@+id/btnFecha"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Filtrar por fecha"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#111827"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- BOTÓN AGREGAR -->
+    <Button
+        android:id="@+id/btnAgregar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Agregar venta"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#2563EB"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- BOTÓN RESUMEN -->
+    <Button
+        android:id="@+id/btnResumen"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Ver clientes"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#10B981"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- LISTA -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerVentas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>

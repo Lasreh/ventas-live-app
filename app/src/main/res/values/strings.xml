@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">VentasLiveApp</string>
+    <string name="title_activity_agregar_venta">AgregarVentaActivity</string>
+</resources>
