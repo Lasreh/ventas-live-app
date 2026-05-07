@@ -7,6 +7,7 @@ import cl.salinas.ventasliveapp.data.FirestoreManager
 import cl.salinas.ventasliveapp.databinding.ActivityAgregarVentaBinding
 import cl.salinas.ventasliveapp.model.Venta
 import cl.salinas.ventasliveapp.util.toTitleCase
+import cl.salinas.ventasliveapp.util.DateManager
 
 class AgregarVentaActivity : AppCompatActivity() {
 
@@ -71,10 +72,9 @@ class AgregarVentaActivity : AppCompatActivity() {
                 precio = precio,
                 pagado = pagadoActual,
                 timestamp = if (modoEditar) {
-                    // mantener el original (ideal)
                     intent.getLongExtra("timestamp", System.currentTimeMillis())
                 } else {
-                    System.currentTimeMillis()
+                    DateManager.selectedStart
                 }
             )
 

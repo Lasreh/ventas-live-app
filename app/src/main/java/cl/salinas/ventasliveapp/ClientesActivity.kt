@@ -13,7 +13,8 @@ import java.util.Calendar
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import cl.salinas.ventasliveapp.util.toPriceCLP
-import cl.salinas.ventasliveapp.util.toTitleCase
+import cl.salinas.ventasliveapp.util.DateManager
+
 class ClientesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityClientesBinding
@@ -30,7 +31,14 @@ class ClientesActivity : AppCompatActivity() {
         setupRecycler()
         setupButtons()
 
-        cargarPorFechaHoy()
+        if (DateManager.selectedStart == 0L) {
+            DateManager.setToday()
+        }
+
+        cargarPorRango(
+            DateManager.selectedStart,
+            DateManager.selectedEnd
+        )
     }
 
     // 🔵 RECYCLER PRO (CORREGIDO)
@@ -90,7 +98,9 @@ class ClientesActivity : AppCompatActivity() {
     // 📅 SELECTOR FECHA
     private fun abrirSelectorFecha() {
 
-        val calendar = Calendar.getInstance()
+        val calendar = Calendar.getInstance().apply {
+            timeInMillis = DateManager.selectedStart
+        }
 
         DatePickerDialog(
             this,
@@ -98,6 +108,8 @@ class ClientesActivity : AppCompatActivity() {
 
                 val (start, end) =
                     DateUtils.obtenerRangoTurno(year, month, day)
+
+                DateManager.setDate(start, end)
 
                 cargarPorRango(start, end)
             },

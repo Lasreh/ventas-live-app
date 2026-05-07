@@ -19,7 +19,7 @@ class FirestoreManager {
             id = ref.id,
             cliente = venta.cliente.trim().lowercase(), // 🔥 normalización base
             nombrePrenda = venta.nombrePrenda.trim().lowercase(),
-            timestamp = System.currentTimeMillis()
+            timestamp = venta.timestamp
         )
 
         ref.set(ventaFinal)

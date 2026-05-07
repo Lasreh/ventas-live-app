@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cl.salinas.ventasliveapp.adapter.VentaAdapter
 import cl.salinas.ventasliveapp.data.FirestoreManager
 import cl.salinas.ventasliveapp.databinding.ActivityMainBinding
-import cl.salinas.ventasliveapp.model.Venta
 import java.util.Calendar
+import cl.salinas.ventasliveapp.util.DateManager
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +28,23 @@ class MainActivity : AppCompatActivity() {
         setupRecycler()
         setupButtons()
 
-        cargarVentasHoy()
+        if (DateManager.selectedStart == 0L) {
+            DateManager.setToday()
+        }
+
+        cargarPorRango(
+            DateManager.selectedStart,
+            DateManager.selectedEnd
+        )
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        cargarPorRango(
+            DateManager.selectedStart,
+            DateManager.selectedEnd
+        )
     }
 
     // 🔵 RECYCLER SOLO UNA VEZ
@@ -83,14 +100,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // 🔥 FIRESTORE SOLO ACTUALIZA UI
-    private fun cargarVentasHoy() {
-
-        val (start, end) = DateUtils.obtenerRangoHoyTurno()
+    private fun cargarPorRango(start: Long, end: Long) {
 
         firestore.obtenerVentasPorRango(start, end) { ventas ->
 
-            // ✔ importante: nueva lista inmutable
             adapter.submitList(ventas.toList())
         }
     }
@@ -98,17 +111,20 @@ class MainActivity : AppCompatActivity() {
     // 📅 FILTRO POR FECHA
     private fun abrirSelectorFecha() {
 
-        val calendar = Calendar.getInstance()
+        val calendar = Calendar.getInstance().apply {
+            timeInMillis = DateManager.selectedStart
+        }
 
         DatePickerDialog(
             this,
             { _, year, month, day ->
 
-                val (start, end) = DateUtils.obtenerRangoTurno(year, month, day)
+                val (start, end) =
+                    DateUtils.obtenerRangoTurno(year, month, day)
 
-                firestore.obtenerVentasPorRango(start, end) { ventas ->
-                    adapter.submitList(ventas.toList())
-                }
+                DateManager.setDate(start, end)
+
+                cargarPorRango(start, end)
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
