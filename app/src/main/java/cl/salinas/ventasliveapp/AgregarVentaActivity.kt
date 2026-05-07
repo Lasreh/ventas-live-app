@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import cl.salinas.ventasliveapp.data.FirestoreManager
 import cl.salinas.ventasliveapp.databinding.ActivityAgregarVentaBinding
 import cl.salinas.ventasliveapp.model.Venta
+import cl.salinas.ventasliveapp.util.toTitleCase
 
 class AgregarVentaActivity : AppCompatActivity() {
 
@@ -27,8 +28,13 @@ class AgregarVentaActivity : AppCompatActivity() {
         if (modoEditar) {
             ventaId = intent.getStringExtra("ventaId")
 
-            binding.editNombre.setText(intent.getStringExtra("nombrePrenda"))
-            binding.editCliente.setText(intent.getStringExtra("cliente"))
+            binding.editCliente.setText(
+                intent.getStringExtra("cliente")?.toTitleCase()
+            )
+
+            binding.editNombre.setText(
+                intent.getStringExtra("nombrePrenda")?.toTitleCase()
+            )
 
             // 🔥 FIX: precio es Long (no Int)
             binding.editPrecio.setText(
@@ -40,8 +46,8 @@ class AgregarVentaActivity : AppCompatActivity() {
 
         binding.btnGuardar.setOnClickListener {
 
+            val cliente = binding.editCliente.text.toString().trim().lowercase()
             val nombre = binding.editNombre.text.toString().trim()
-            val cliente = binding.editCliente.text.toString().trim()
             val precioText = binding.editPrecio.text.toString().trim()
 
             if (nombre.isEmpty() || cliente.isEmpty() || precioText.isEmpty()) {
@@ -55,12 +61,15 @@ class AgregarVentaActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            val pagadoActual = intent.getBooleanExtra("pagado", false)
+
             // 🔥 IMPORTANTE: NO pisar timestamp en edición
             val venta = Venta(
                 id = ventaId ?: "",
                 nombrePrenda = nombre,
                 cliente = cliente,
                 precio = precio,
+                pagado = pagadoActual,
                 timestamp = if (modoEditar) {
                     // mantener el original (ideal)
                     intent.getLongExtra("timestamp", System.currentTimeMillis())

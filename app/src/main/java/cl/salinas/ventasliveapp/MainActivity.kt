@@ -16,47 +16,82 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val firestore = FirestoreManager()
 
+    private lateinit var adapter: VentaAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.recyclerVentas.layoutManager =
-            LinearLayoutManager(this)
+        setupRecycler()
+        setupButtons()
 
-        // 📅 FILTRO FECHA
+        cargarVentasHoy()
+    }
+
+    // 🔵 RECYCLER SOLO UNA VEZ
+    private fun setupRecycler() {
+
+        adapter = VentaAdapter(
+            onDelete = { venta ->
+
+                androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setTitle("Eliminar venta")
+                    .setMessage("¿Seguro que quieres eliminar esta venta?")
+                    .setPositiveButton("Eliminar") { _, _ ->
+                        firestore.eliminarVenta(venta.id)
+                        // ❌ NO recargar lista aquí
+                    }
+                    .setNegativeButton("Cancelar", null)
+                    .show()
+            },
+
+            onEdit = { venta ->
+
+                val intent = Intent(this, AgregarVentaActivity::class.java)
+
+                intent.putExtra("modo", "editar")
+                intent.putExtra("ventaId", venta.id)
+                intent.putExtra("nombrePrenda", venta.nombrePrenda)
+                intent.putExtra("cliente", venta.cliente)
+                intent.putExtra("precio", venta.precio)
+                intent.putExtra("pagado", venta.pagado)
+                intent.putExtra("timestamp", venta.timestamp)
+
+                startActivity(intent)
+            }
+        )
+
+        binding.recyclerVentas.layoutManager = LinearLayoutManager(this)
+        binding.recyclerVentas.adapter = adapter
+    }
+
+    // 🔘 BOTONES
+    private fun setupButtons() {
+
         binding.btnFecha.setOnClickListener {
             abrirSelectorFecha()
         }
 
-        // 🔵 CARGA INICIAL
-        cargarVentasHoy()
-
-        // 🟢 AGREGAR
         binding.btnAgregar.setOnClickListener {
             startActivity(Intent(this, AgregarVentaActivity::class.java))
         }
 
-        // 📊 CLIENTES
         binding.btnResumen.setOnClickListener {
             startActivity(Intent(this, ClientesActivity::class.java))
         }
     }
 
-    // 🔄 IMPORTANTE: recargar cuando vuelves a la pantalla
-    override fun onResume() {
-        super.onResume()
-        cargarVentasHoy()
-    }
-
-    // 🔵 TURNO ACTUAL
+    // 🔥 FIRESTORE SOLO ACTUALIZA UI
     private fun cargarVentasHoy() {
 
         val (start, end) = DateUtils.obtenerRangoHoyTurno()
 
         firestore.obtenerVentasPorRango(start, end) { ventas ->
-            mostrarVentas(ventas)
+
+            // ✔ importante: nueva lista inmutable
+            adapter.submitList(ventas.toList())
         }
     }
 
@@ -69,50 +104,15 @@ class MainActivity : AppCompatActivity() {
             this,
             { _, year, month, day ->
 
-                val (start, end) =
-                    DateUtils.obtenerRangoTurno(year, month, day)
+                val (start, end) = DateUtils.obtenerRangoTurno(year, month, day)
 
                 firestore.obtenerVentasPorRango(start, end) { ventas ->
-                    mostrarVentas(ventas)
+                    adapter.submitList(ventas.toList())
                 }
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         ).show()
-    }
-
-    // 🧠 MOSTRAR VENTAS
-    private fun mostrarVentas(ventas: List<Venta>) {
-
-        binding.recyclerVentas.adapter = VentaAdapter(
-            ventas,
-            onDelete = { venta ->
-
-                androidx.appcompat.app.AlertDialog.Builder(this)
-                    .setTitle("Eliminar venta")
-                    .setMessage("¿Seguro que quieres eliminar esta venta?")
-                    .setPositiveButton("Eliminar") { _, _ ->
-                        firestore.eliminarVenta(venta.id)
-
-                        // 🔄 recargar lista después de borrar
-                        cargarVentasHoy()
-                    }
-                    .setNegativeButton("Cancelar", null)
-                    .show()
-            },
-            onEdit = { venta ->
-
-                val intent = Intent(this, AgregarVentaActivity::class.java)
-
-                intent.putExtra("modo", "editar")
-                intent.putExtra("ventaId", venta.id)
-                intent.putExtra("nombrePrenda", venta.nombrePrenda)
-                intent.putExtra("cliente", venta.cliente)
-                intent.putExtra("precio", venta.precio)
-
-                startActivity(intent)
-            }
-        )
     }
 }

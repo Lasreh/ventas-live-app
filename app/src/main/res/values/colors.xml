@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="azul">#2563EB</color>
-    <color name="verde">#10B981</color>
-    <color name="gris_fondo">#F3F4F6</color>
-    <color name="negro">#111827</color>
-    <color name="gris_texto">#6B7280</color>
+
+    <!-- Fondo principal -->
+    <color name="bg_black">#0A0A0A</color>
+
+    <!-- Cards -->
+    <color name="card_gray">#1B1B1B</color>
+
+    <!-- Superficie -->
+    <color name="surface_gray">#2A2A2A</color>
+
+    <!-- Gris botones -->
+    <color name="button_gray">#303030</color>
+
+    <!-- Amarillo acento -->
+    <color name="accent_yellow">#D4FF00</color>
+
+    <!-- Texto -->
+    <color name="white_text">#FFFFFF</color>
+
+    <!-- Texto secundario -->
+    <color name="gray_text">#9A9A9A</color>
+
+    <color name="red_text">#DC2626</color>
+
+    <color name="green_text">#16A34A</color>
+
 </resources>

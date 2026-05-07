@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7FB">
+    android:background="@color/bg_black"
+    android:padding="24dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
             android:text="Nueva venta"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:textColor="#0F172A"
+            android:textColor="@color/white_text"
             android:gravity="center"
             android:layout_marginBottom="18dp"/>
 
@@ -29,8 +30,9 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="18dp"
             app:cardElevation="6dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardUseCompatPadding="true">
+            app:cardBackgroundColor="@color/card_gray"
+            app:cardUseCompatPadding="true"
+            app:strokeColor="@android:color/transparent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,16 +45,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="#2563EB"
-                    app:hintTextColor="#64748B">
+                    app:hintTextColor="@color/gray_text"
+                    app:boxStrokeColor="@color/accent_yellow">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editNombre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Nombre de la prenda"
-                        android:textColor="#111827"
-                        android:textColorHint="#9CA3AF"/>
+                        android:textColor="@color/white_text"
+                        android:textColorHint="@color/green_text"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- PRECIO -->
@@ -60,8 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="#2563EB">
+                    app:hintTextColor="@color/gray_text"
+                    app:boxStrokeColor="@color/accent_yellow">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editPrecio"
@@ -69,8 +71,8 @@
                         android:layout_height="wrap_content"
                         android:hint="Precio"
                         android:inputType="number"
-                        android:textColor="#111827"
-                        android:textColorHint="#9CA3AF"/>
+                        android:textColor="@color/white_text"
+                        android:textColorHint="@color/green_text"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- CLIENTE -->
@@ -78,16 +80,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="#2563EB">
+                    app:hintTextColor="@color/gray_text"
+                    app:boxStrokeColor="@color/accent_yellow">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editCliente"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Cliente"
-                        android:textColor="#111827"
-                        android:textColorHint="#9CA3AF"/>
+                        android:textColor="@color/white_text"
+                        android:textColorHint="@color/green_text"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- BOTÓN -->
@@ -100,7 +102,7 @@
                     android:textSize="16sp"
                     android:layout_marginTop="20dp"
                     app:cornerRadius="14dp"
-                    app:backgroundTint="#2563EB"
+                    app:backgroundTint="@color/button_gray"
                     android:textColor="#FFFFFF"/>
 
             </LinearLayout>

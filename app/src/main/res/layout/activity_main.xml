@@ -4,71 +4,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F3F4F6"
+    android:background="@color/bg_black"
     android:padding="24dp">
 
-    <!-- TÍTULO -->
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- HEADER -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ventas en Vivo"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#111827"/>
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp">
 
-    <!-- SUBTÍTULO -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gestiona tus ventas fácilmente"
-        android:textSize="14sp"
-        android:textColor="#6B7280"
-        android:layout_marginBottom="16dp"/>
+        <!-- TÍTULO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ventas en Vivo"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@color/white_text"
+            android:gravity="center"/>
 
-    <!-- IMAGEN -->
-    <ImageView
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_gravity="center"
-        android:src="@drawable/portada"
-        android:scaleType="centerCrop"
-        android:layout_marginBottom="16dp"/>
+        <!-- SUBTÍTULO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gestiona tus ventas fácilmente"
+            android:textSize="20sp"
+            android:textColor="@color/gray_text"
+            android:layout_marginTop="6dp"
+            android:gravity="center"/>
+    </LinearLayout>
 
-    <!-- 📅 FILTRO FECHA -->
-    <Button
+    <!-- FILTRO FECHA -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnFecha"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="52dp"
         android:text="Filtrar por fecha"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#111827"
-        android:layout_marginBottom="16dp"/>
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="@color/white_text"
+        android:backgroundTint="@color/button_gray"
+        android:layout_marginBottom="14dp"
+        app:cornerRadius="16dp"
+        app:elevation="0dp" />
 
     <!-- BOTÓN AGREGAR -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAgregar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:text="Agregar venta"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#2563EB"
-        android:layout_marginBottom="12dp"/>
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="@color/white_text"
+        android:backgroundTint="@color/button_gray"
+        android:layout_marginBottom="14dp"
+        app:cornerRadius="18dp"
+        app:elevation="0dp" />
 
     <!-- BOTÓN RESUMEN -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnResumen"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:text="Ver clientes"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#10B981"
-        android:layout_marginBottom="12dp"/>
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="@color/white_text"
+        android:backgroundTint="@color/button_gray"
+        android:layout_marginBottom="18dp"
+        app:cornerRadius="18dp"
+        app:elevation="0dp" />
 
-    <!-- LISTA -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerVentas"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="12dp"
+        android:overScrollMode="never"
+        android:layoutAnimation="@null"/>
 
 </LinearLayout>

@@ -6,9 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
     app:cardCornerRadius="16dp"
-    app:cardElevation="6dp"
-    app:cardUseCompatPadding="true"
-    app:cardBackgroundColor="#FFFFFF">
+    app:strokeColor="@android:color/transparent"
+    app:cardBackgroundColor="@color/card_gray">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,33 +19,65 @@
             android:id="@+id/txtCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cliente"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#111827"/>
+            android:textColor="@color/white_text"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total"
-            android:textColor="#2563EB"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/accent_yellow"
             android:textStyle="bold"
-            android:layout_marginTop="6dp"/>
+            android:textSize="25sp"/>
+
+        <TextView
+            android:id="@+id/txtEstado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#DC2626"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/txtDetalle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textColor="#6B7280"/>
+            android:textColor="@color/gray_text" />
 
-        <Button
-            android:id="@+id/btnEliminar"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Eliminar"
-            android:layout_marginTop="12dp"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <Button
+                android:id="@+id/btnEliminar"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:text="Eliminar"
+                android:textColor="@color/white_text"
+                android:backgroundTint="@color/red_text" />
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnPagado"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:text="Pagado"
+                android:textColor="@color/white_text"
+                android:backgroundTint="@color/button_gray" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

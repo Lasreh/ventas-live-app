@@ -5,15 +5,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import cl.salinas.ventasliveapp.R
 import cl.salinas.ventasliveapp.model.Venta
+import cl.salinas.ventasliveapp.util.toPriceCLP
+import cl.salinas.ventasliveapp.util.toTitleCase
 
 class VentaAdapter(
-    private val lista: List<Venta>,
     private val onDelete: (Venta) -> Unit,
     private val onEdit: (Venta) -> Unit
-) : RecyclerView.Adapter<VentaAdapter.VentaViewHolder>() {
+) : ListAdapter<Venta, VentaAdapter.VentaViewHolder>(DiffCallback) {
 
     class VentaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -33,22 +36,34 @@ class VentaAdapter(
 
     override fun onBindViewHolder(holder: VentaViewHolder, position: Int) {
 
-        val venta = lista.getOrNull(position) ?: return
+        val venta = getItem(position)
 
-        holder.prenda.text = venta.nombrePrenda
-        holder.cliente.text = "Cliente: ${venta.cliente}"
-        holder.precio.text = "$${venta.precio}"
+        holder.prenda.text = venta.nombrePrenda.toTitleCase()
+        holder.cliente.text = "Cliente: ${venta.cliente.toTitleCase()}"
 
-        // 🗑 eliminar
+        // 💥 FORMATO PRO (SIN SPANNABLE)
+        holder.precio.text = venta.precio.toPriceCLP()
+
         holder.btnDelete.setOnClickListener {
             onDelete(venta)
         }
 
-        // ✏️ editar
         holder.btnEdit.setOnClickListener {
             onEdit(venta)
         }
     }
 
-    override fun getItemCount(): Int = lista.size
+    companion object {
+
+        private val DiffCallback = object : DiffUtil.ItemCallback<Venta>() {
+
+            override fun areItemsTheSame(oldItem: Venta, newItem: Venta): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Venta, newItem: Venta): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 }

@@ -1,56 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFC"
-    android:padding="16dp">
+    android:background="@color/bg_black"
+    android:padding="20dp"
+    app:strokeWidth="0dp">
 
     <!-- HEADER -->
-    <TextView
-        android:text="📊 Clientes"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#0F172A"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"/>
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp">
 
-    <!-- SUBTÍTULO -->
-    <TextView
-        android:text="Resumen de compras y total gastado"
-        android:textSize="14sp"
-        android:textColor="#64748B"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"/>
+        <TextView
+            android:text="Clientes"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="@color/white_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-    <!-- 📅 FILTRO FECHA -->
-    <Button
+        <TextView
+            android:text="Resumen de compras y total gastado"
+            android:textSize="14sp"
+            android:textColor="@color/gray_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"/>
+    </LinearLayout>
+
+    <!-- FILTRO -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnFechaClientes"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="52dp"
         android:text="Filtrar por fecha"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#111827"
-        android:layout_marginBottom="12dp"/>
-
-    <!-- 💰 TOTAL GENERAL -->
-    <TextView
-        android:id="@+id/txtTotalGeneral"
-        android:text="Total general: $0"
-        android:textSize="18sp"
+        android:textAllCaps="false"
         android:textStyle="bold"
-        android:textColor="#2563EB"
-        android:layout_width="wrap_content"
+        android:textColor="@color/white_text"
+        android:backgroundTint="@color/button_gray"
+        android:layout_marginBottom="14dp"
+        app:cornerRadius="16dp"
+        app:elevation="0dp"/>
+
+    <!-- TOTAL GENERAL (MÉTRICA) -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"/>
+        android:layout_marginBottom="14dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/card_gray"
+        app:strokeWidth="0dp"
+        app:strokeColor="@android:color/transparent">
+
+        <TextView
+            android:id="@+id/txtTotalGeneral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total general: $0"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/white_text"
+            android:padding="16dp"/>
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- LISTA -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerClientes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:clipToPadding="false"
         android:paddingBottom="12dp"/>
 

@@ -1,9 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Base application theme. -->
-    <style name="Base.Theme.VentasLiveApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.VentasLiveApp"
+        parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="android:windowBackground">@color/bg_black</item>
+
+        <item name="colorPrimary">@color/accent_yellow</item>
+
+        <item name="android:textColor">@color/white_text</item>
+
     </style>
 
-    <style name="Theme.VentasLiveApp" parent="Base.Theme.VentasLiveApp" />
+    <style name="Theme.VentasLiveApp"
+        parent="Base.Theme.VentasLiveApp" />
+
 </resources>
